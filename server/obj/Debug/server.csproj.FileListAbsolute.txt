@@ -1,0 +1,9 @@
+C:\BSUIR\KSiS\lab2\lab2\server\bin\Debug\server.exe.config
+C:\BSUIR\KSiS\lab2\lab2\server\bin\Debug\server.exe
+C:\BSUIR\KSiS\lab2\lab2\server\bin\Debug\server.pdb
+C:\BSUIR\KSiS\lab2\lab2\server\obj\Debug\server.csproj.AssemblyReference.cache
+C:\BSUIR\KSiS\lab2\lab2\server\obj\Debug\lab2.Properties.Resources.resources
+C:\BSUIR\KSiS\lab2\lab2\server\obj\Debug\server.csproj.GenerateResource.cache
+C:\BSUIR\KSiS\lab2\lab2\server\obj\Debug\server.csproj.CoreCompileInputs.cache
+C:\BSUIR\KSiS\lab2\lab2\server\obj\Debug\server.exe
+C:\BSUIR\KSiS\lab2\lab2\server\obj\Debug\server.pdb

@@ -1,6 +1,6 @@
 ﻿namespace lab2
 {
-    partial class FormMain
+    partial class FormServer
     {
         /// <summary>
         /// Required designer variable.

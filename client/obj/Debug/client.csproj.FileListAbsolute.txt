@@ -1,0 +1,11 @@
+C:\BSUIR\KSiS\lab2\lab2\client\bin\Debug\client.exe.config
+C:\BSUIR\KSiS\lab2\lab2\client\bin\Debug\client.exe
+C:\BSUIR\KSiS\lab2\lab2\client\bin\Debug\client.pdb
+C:\BSUIR\KSiS\lab2\lab2\client\obj\Debug\client.csproj.AssemblyReference.cache
+C:\BSUIR\KSiS\lab2\lab2\client\obj\Debug\client.Properties.Resources.resources
+C:\BSUIR\KSiS\lab2\lab2\client\obj\Debug\client.csproj.GenerateResource.cache
+C:\BSUIR\KSiS\lab2\lab2\client\obj\Debug\client.csproj.CoreCompileInputs.cache
+C:\BSUIR\KSiS\lab2\lab2\client\obj\Debug\client.exe
+C:\BSUIR\KSiS\lab2\lab2\client\obj\Debug\client.pdb
+C:\BSUIR\KSiS\lab2\lab2\client\obj\Debug\client.FormClient.resources
+C:\BSUIR\KSiS\lab2\lab2\client\obj\Debug\client.FormClientChat.resources

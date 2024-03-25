@@ -1,4 +1,4 @@
-﻿namespace lab2
+﻿namespace server
 {
     partial class FormServer
     {
@@ -38,7 +38,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(279, 326);
+            this.btnStart.Location = new System.Drawing.Point(326, 417);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(243, 41);
             this.btnStart.TabIndex = 7;
@@ -48,21 +48,21 @@
             // 
             // tbPort
             // 
-            this.tbPort.Location = new System.Drawing.Point(279, 246);
+            this.tbPort.Location = new System.Drawing.Point(326, 212);
             this.tbPort.Name = "tbPort";
             this.tbPort.Size = new System.Drawing.Size(243, 26);
             this.tbPort.TabIndex = 5;
             // 
             // tbIP
             // 
-            this.tbIP.Location = new System.Drawing.Point(279, 119);
+            this.tbIP.Location = new System.Drawing.Point(326, 123);
             this.tbIP.Name = "tbIP";
             this.tbIP.Size = new System.Drawing.Size(243, 26);
             this.tbIP.TabIndex = 6;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(279, 206);
+            this.label2.Location = new System.Drawing.Point(326, 172);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 23);
             this.label2.TabIndex = 3;
@@ -70,7 +70,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(279, 83);
+            this.label1.Location = new System.Drawing.Point(326, 87);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 23);
             this.label1.TabIndex = 4;
@@ -80,7 +80,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(879, 535);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tbPort);
             this.Controls.Add(this.tbIP);

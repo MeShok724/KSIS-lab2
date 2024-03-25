@@ -6,74 +6,56 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace lab2
+namespace server
 {
     public partial class FormServerChat : Form
     {
-        public static IPAddress ipAddress;
-        public static int port;
-        private TcpListener server;
-        private NetworkStream stream;
-        public FormServerChat()
+        private Server _server;
+        public FormServerChat(Server server, string ipStr, string portStr)
         {
             InitializeComponent();
-            lbServer.Text = "";
-            server = new TcpListener(ipAddress, port);
-            server.Start();
-            Thread acceptThread = new Thread(() =>
-            {
-                while (true)
-                {
-                    TcpClient client = server.AcceptTcpClient();
-                    lbServer.Invoke(new Action(() =>
-                    {
-                        lbServer.Items.Add("The client was connected");
-                    }));
-                    
-                    ClientHandler(client);
-                    break;
-                }
-            });
-            acceptThread.Start();
+            lIpAdress.Text += " "+ipStr;
+            lPort.Text += " "+portStr;
+            _server = server;
         }
-        private void ClientHandler(object obj)
+        private void FormServerChat_Load(object sender, EventArgs e)
         {
-            TcpClient client = (TcpClient)obj;
-            stream = client.GetStream();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            try
+            lbServer.Text = "";
+            // IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+            // int port = 8888; // Используем порт 8888
+            // _server = new Server(ipAddress, port);
+            _server.MessageReceived += Server_MessageReceived;
+            _server.MessageInfo += Server_MessageReceived;
+            _server.threadServerMain = new Thread(_server.Start);
+            _server.threadServerMain.Start();
+        }
+        private void Server_MessageReceived(object sender, string message)
+        {
+            // Обработка полученного сообщения
+            if (!string.IsNullOrEmpty(message))
             {
-                // Поток для чтения сообщений от клиента
-                Thread receiveThread = new Thread(() =>
-                {
-                    while (true)
-                    {
-                        bytesRead = stream.Read(buffer, 0, buffer.Length);
-                        string receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                        lbServer.Invoke(new Action(() =>
-                        {
-                            lbServer.Items.Add("Client: " + receivedMessage);
-                        }));
-                    }
-                });
-                receiveThread.Start();
+                AddMessageToListBox(message);
             }
-            catch (Exception ex)
+        }
+        private void AddMessageToListBox(string message)
+        {
+            if (InvokeRequired)
             {
-                lbServer.Invoke(new Action(() =>
-                {
-                    lbServer.Items.Add("Ошибка: " + ex.Message);
-                }));
+                Invoke(new Action<string>(AddMessageToListBox), message);
+                return;
             }
+            lbServer.Items.Add(message);
         }
 
-        private void btnSend_Click(object sender, EventArgs e)
+        private void FormServerChat_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string message = tbMessage.Text;
-            lbServer.Items.Add("You: " + message);
-            byte[] data = Encoding.UTF8.GetBytes(message);
-            stream.Write(data, 0, data.Length);
+            _server.Stop();
+            Application.Exit();
+        }
+
+        private void btnStopServer_Click(object sender, EventArgs e)
+        {
+            _server.Stop();
         }
     }
 }

@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace client
@@ -18,33 +9,36 @@ namespace client
         public FormClient()
         {
             InitializeComponent();
+            tbIP.Text = "127.0.0.1";
+            tbPort.Text = "8081";
+            tbNickname.Text = "User1";
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            // if (IsIpAddressAndPortValid(tbIP.Text, int.Parse(tbPort.Text)))
-            // {
-            //     MessageBox.Show("Server not found");
-            //     return;
-            // }
-            FormClientChat.ipAddress = IPAddress.Parse(tbIP.Text);
-            FormClientChat.port = int.Parse(tbPort.Text);
-            FormClientChat form = new FormClientChat();
+            Client client = new Client(tbNickname.Text);
+            string ip = tbIP.Text;
+            string port = tbPort.Text;
+            if (!IsIpAddressAndPortValid(ip, port))
+                return;
+            client.Connect(ip, int.Parse(port));
+            FormClientChat form = new FormClientChat(client);
             form.Show();
-            this.Hide();
+            Hide();
         }
-        static bool IsIpAddressAndPortValid(string ipAddress, int port)
+        static bool IsIpAddressAndPortValid(string ipAddress, string port)
         {
             try
             {
                 using (TcpClient tcpClient = new TcpClient())
                 {
-                    tcpClient.Connect(ipAddress, port);
+                    tcpClient.Connect(ipAddress, int.Parse(port));
                     return true;
                 }
             }
             catch (Exception)
             {
+                MessageBox.Show("Failed to connect to the server");
                 return false;
             }
         }

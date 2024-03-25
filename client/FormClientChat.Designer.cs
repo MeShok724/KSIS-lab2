@@ -35,6 +35,7 @@ namespace client
             this.btnSend = new System.Windows.Forms.Button();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tbMessage = new System.Windows.Forms.TextBox();
+            this.btnDisconnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbClient
@@ -48,7 +49,7 @@ namespace client
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(246, 524);
+            this.btnSend.Location = new System.Drawing.Point(175, 531);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(196, 54);
             this.btnSend.TabIndex = 2;
@@ -69,19 +70,33 @@ namespace client
             this.tbMessage.Size = new System.Drawing.Size(541, 26);
             this.tbMessage.TabIndex = 3;
             // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.Location = new System.Drawing.Point(475, 531);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(196, 54);
+            this.btnDisconnect.TabIndex = 4;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            // 
             // FormClientChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(889, 687);
+            this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.tbMessage);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.lbClient);
             this.Name = "FormClientChat";
             this.Text = "Client chat";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClientChat_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button btnDisconnect;
 
         private System.Windows.Forms.TextBox tbMessage;
 

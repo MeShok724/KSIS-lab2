@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace lab2.Properties
+namespace server.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.

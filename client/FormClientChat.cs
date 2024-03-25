@@ -10,43 +10,56 @@ namespace client
 {
     public partial class FormClientChat : Form
     {
+        private Client _client;
         public static IPAddress ipAddress;
         public static int port;
-        // IPEndPoint endPoint;
-        // Socket socket;
         private NetworkStream stream;
         
-        public FormClientChat()
+        public FormClientChat(Client client)
         {
             InitializeComponent();
             lbClient.Text = "";
-                // endPoint = new IPEndPoint(ipAddress, port);
-                // socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                // socket.Connect(endPoint);
-            
-            // Подключение к серверу
-            TcpClient client = new TcpClient(ipAddress.ToString(), port);
-            stream = client.GetStream();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            Thread receiveThread = new Thread(() =>
-            {
-                while (true)
-                {
-                    bytesRead = stream.Read(buffer, 0, buffer.Length);
-                    string receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    lbClient.Items.Add("Server: " + receivedMessage);
-                }
-            });
-            receiveThread.Start();
+            lbClient.Items.Add("You are connected.");
+            _client = client;
+            client.MessageReceived += Client_MessageReceived;
         }
 
         private void btnSend_Click(object sender, EventArgs e)
         {
             string message = tbMessage.Text;
-            lbClient.Items.Add("You: " + message);
-            byte[] data = Encoding.UTF8.GetBytes(message);
-            stream.Write(data, 0, data.Length);
+            _client.SendMessage(message);
+            tbMessage.Text = "";
+        }
+        private void Client_MessageReceived(object sender, string message)
+        {
+            AddMessageToListBox(message);
+        }
+        private void AddMessageToListBox(string message)
+        {
+            if (lbClient.InvokeRequired)
+            {
+                try
+                {
+                    Invoke(new Action<string>(AddMessageToListBox), message);
+                }
+                catch { }
+                return;
+            }
+
+            lbClient.Items.Add(message);
+        }
+
+        private void FormClientChat_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _client.Disconnect();
+            Application.Exit();
+        }
+
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            _client.Disconnect();
+            lbClient.Items.Add("You are disconnected.");
+            Application.Exit();
         }
     }
 }
